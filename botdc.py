@@ -52,10 +52,21 @@ async def on_message(message):
         text = message.content[6:]
         if text:
             await message.delete()
-            msg = await message.channel.send('-' * len(text))
-            for i in range(len(text)):
-                await msg.edit(content=text[:i + 1].rjust(len(text), '-'))
+            lines = text.split('\n')  # Podział na linie
+            max_len = max(len(line) for line in lines)
+            masked_lines = ['-' * max_len for _ in lines]  # Maskowanie na podstawie najdłuższej linii
+            msg = await message.channel.send('\n'.join(masked_lines))
+            for i in range(max_len):
+                updated_lines = []
+                for line in lines:
+                    if i < len(line):
+                        updated_line = line[:i + 1].ljust(max_len, '-')  # Odkrywamy litery
+                    else:
+                        updated_line = line.ljust(max_len, '-')  # Zachowujemy odkryte linie
+                    updated_lines.append(updated_line)
+                await msg.edit(content='\n'.join(updated_lines))
                 await asyncio.sleep(0.5)
+            await msg.edit(content='\n'.join(lines))  # Ustawienie pełnego tekstu po animacji
 
 # Start both the web server and the Discord bot
 if __name__ == "__main__":
