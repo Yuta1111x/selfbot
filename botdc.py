@@ -22,7 +22,7 @@ async def on_message(message):
                         deleted += 1
                         if deleted >= num: break
                         await asyncio.sleep(1)
-                await message.channel.send(f"Usunięto {deleted} wiadomości.") if isinstance(message.channel, discord.DMChannel) else print(f"Usunięto {deleted}.")
+                print(f"Usunięto {deleted} wiadomości.") if isinstance(message.channel, discord.DMChannel) else print(f"Usunięto {deleted}.")
             else: await message.channel.send("Podaj liczbę większą niż 0.")
         except: await message.channel.send("Proszę podać poprawną liczbę.")
     elif message.content.startswith(".anim"):
