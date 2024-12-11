@@ -27,7 +27,7 @@ async def on_message(message):
     if message.author != client.user:
         return
 
-    if message.content.lower() == "ping":
+    if message.content.lower() == ".ping":
         await message.channel.send(f"Ping: {round(client.latency * 1000)}ms")
 
     elif message.content.startswith(".clear"):
@@ -44,9 +44,9 @@ async def on_message(message):
                         await asyncio.sleep(1)
                 print(f"Usunięto {deleted} wiadomości.") if isinstance(message.channel, discord.DMChannel) else print(f"Usunięto {deleted}.")
             else:
-                await message.channel.send("Podaj liczbę większą niż 0.")
+                print("Podaj liczbę większą niż 0.")
         except:
-            await message.channel.send("Proszę podać poprawną liczbę.")
+            print("Proszę podać poprawną liczbę.")
 
     elif message.content.startswith(".anim"):
         text = message.content[6:]
