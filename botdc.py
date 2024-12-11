@@ -55,7 +55,7 @@ async def on_message(message):
             msg = await message.channel.send('-' * len(text))
             for i in range(len(text)):
                 await msg.edit(content=text[:i + 1].rjust(len(text), '-'))
-                await asyncio.sleep(0.2)
+                await asyncio.sleep(0.5)
 
 # Start both the web server and the Discord bot
 if __name__ == "__main__":
